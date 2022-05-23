@@ -1,0 +1,32 @@
+@import 'preview_product.module.scss';
+
+@keyframes move {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.card {
+    &:hover {
+        .title {
+            animation: move 3s linear infinite forwards;
+        }
+    }
+
+    .title {
+        transition: 2s linear;
+        z-index: 1;
+        background: none;
+    
+        span {
+            background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+            background-clip: text;
+            color: transparent;
+            margin-right: 1em;
+        }
+    }
+}

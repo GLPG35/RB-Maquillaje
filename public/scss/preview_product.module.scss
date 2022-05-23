@@ -1,0 +1,139 @@
+.card {
+    width: 20em;
+    height: 27em;
+    display: flex;
+    flex-direction: column;
+    color: #f0f0f0;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-block: auto;
+    box-shadow: 10px 10px 20px #080808;
+    position: relative;
+
+    .dInfo {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+        z-index: 10;
+        clip-path: circle(15% at 100% 0%);
+        transition: 0.5s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            color: #f0f0f0;
+            transition: 0.2s ease-out;
+
+            &:hover {
+                cursor: pointer;
+                color: #2b2b2b;
+            }
+        }
+
+        span {
+            width: 80%;
+            max-height: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: center;
+            font-weight: 600;
+            color: #2b2b2b;
+            font-size: 1.2em;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+    }
+
+    .dInfoActive {
+        @extend .dInfo;
+        clip-path: circle(200% at 100% 0%);
+    }
+
+    .thumbnail {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+            outline: none;
+        }
+    }
+
+    .bInfo {
+        width: 100%;
+        flex-grow: 1;
+        background-color: #2b2b2b;
+        padding-inline: 1em;
+        display: flex;
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            justify-content: center;
+            width: 80%;
+            overflow: hidden;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 20%;
+                height: 100%;
+                top: 0;
+                right: 0;
+                background: linear-gradient(to left, #2b2b2b, #2b2b2b00);
+                z-index: 2;
+            }
+            
+            .title {
+                font-size: 1.5em;
+                font-weight: 800;
+                background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+                background-clip: text;
+                color: transparent;
+                width: max-content;
+                white-space: nowrap;
+            }
+
+            .price {
+                font-weight: 600;
+            }
+        }
+
+        .cart {
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            button {
+                border-radius: 50%;
+                height: 3em;
+                width: 3em;
+                border: none;
+                outline: none;
+                background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+                color: #f0f0f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s ease-out;
+                box-shadow: 10px 10px 20px 0 #00000046;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

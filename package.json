@@ -1,0 +1,32 @@
+{
+  "name": "rbmu",
+  "version": "1.0.0",
+  "description": "Este sitio web es para la venta de maquillaje de RB Maquillaje Uruguay",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "Gian Luca Porto",
+  "license": "MIT",
+  "dependencies": {
+    "@react-three/drei": "^9.11.0",
+    "@react-three/fiber": "^8.0.17",
+    "firebase": "^9.8.1",
+    "firebase-admin": "^10.2.0",
+    "framer-motion": "^6.3.3",
+    "framer-motion-3d": "^6.3.3",
+    "mongoose": "^6.3.3",
+    "next": "^12.1.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "sass": "^1.51.0",
+    "three": "^0.140.2"
+  },
+  "devDependencies": {
+    "gltf-pipeline": "^3.0.4"
+  }
+}

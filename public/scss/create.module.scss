@@ -1,0 +1,158 @@
+.create {
+    width: calc(100% - 13em);
+    height: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin-left: auto;
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: 85%;
+        width: 5px;
+        background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+        left: 50%;
+        border-radius: 50vh;
+    }
+
+    .content {
+        width: 50%;
+        height: 100%;
+        padding: 2em 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h2 {
+            font-size: 2em;
+            color: #f0f0f0;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        form {
+            width: 50%;
+            height: max-content;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+            margin-block: auto;
+
+            button, input {
+                border: none;
+                outline: none;
+                border-radius: 50vh;
+                height: 3em;
+            }
+
+            input, textarea {
+                background: #0c0c0c;
+                box-shadow: 0 0 0 2px #ff1d4700,
+                    inset 10px 10px 10px #080808,
+                    inset -10px -10px 10px #101010;
+                caret-color: #f0f0f0;
+                color: #c0c0c0;
+                transition: 0.2s ease-out;
+                border: none;
+            }
+
+            .upThumb {
+                display: none;
+            }
+
+            .imageUp {
+                padding: 0.7em 1em;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5em;
+                flex-grow: 1;
+                background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+                color: #ffffff;
+                font-weight: 600;
+                box-shadow: 10px 10px 20px 0 #00000046;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .title {
+                padding-inline: 1em;
+                flex-grow: 2;
+            }
+
+            .price {
+                padding-inline: 1em;
+                flex-grow: 1;
+                -moz-appearance: textfield;
+                
+                &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+                    display: none;
+                }
+            }
+
+            .textarea {
+                width: 100%;
+                position: relative;
+
+                textarea {
+                    grid-column: span 4;
+                    resize: none;
+                    font-family: 'Open Sans', sans-serif;
+                    border-radius: 15px;
+                    padding: 1em;
+                    outline: none;
+                    height: 20em;
+                    width: 100%;
+                }
+
+                span {
+                    position: absolute;
+                    bottom: 1em;
+                    right: 1em;
+                    font-weight: 700;
+                    color: transparent;
+                    background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+                    background-clip: text;
+                }
+            }
+
+            .submit {
+                padding: 0.7em 1em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5em;
+                background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+                color: #ffffff;
+                font-weight: 600;
+                box-shadow: 10px 10px 20px 0 #00000046;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .preview {
+        width: 50%;
+        height: 100%;
+        padding: 2em 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h2 {
+            font-size: 2em;
+            color: #f0f0f0;
+            text-align: center;
+            font-weight: 800;
+        }
+    }
+}
