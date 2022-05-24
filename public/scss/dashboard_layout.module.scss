@@ -178,3 +178,35 @@
         }
     }
 }
+
+@media (max-width: 500px) {
+    .container1 {
+        .nav {
+            width: 5em;
+
+            .profile {
+                justify-content: center;
+
+                &::before {
+                    width: 60%;
+                }
+            }
+
+            .popup {
+                left: 6em
+            }
+
+            .list {
+                a {
+                    justify-content: center;
+
+                    &::before {
+                        left: 0.2em;
+                        height: 70%;
+                        top: initial;
+                    }
+                }
+            }
+        }
+    }
+}

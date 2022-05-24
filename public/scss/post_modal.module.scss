@@ -156,3 +156,20 @@
         }
     }
 }
+
+@media (max-width: 1000px) {
+    .modal {
+        width: 20em;
+        height: 50%;
+        height: initial;
+        aspect-ratio: initial;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+
+        .pic {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 1;
+        }
+    }
+}

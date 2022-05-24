@@ -11,7 +11,7 @@
     padding: 2em 2.5em;
 
     h2 {
-        font-size: 2em;
+        font-size: clamp(1.5em, calc(-0.875em + 8.333vw), 2em);
         color: #f0f0f0;
         text-align: center;
         font-weight: 700;
@@ -69,5 +69,11 @@
                 z-index: -1;
             }
         }
+    }
+}
+
+@media (max-width: 500px) {
+    .modal {
+        width: 90%;
     }
 }

@@ -11,10 +11,17 @@ const Delete = () => {
     const user = useUser()
     const [posts, setPosts] = useState(undefined)
     const [del, setDel] = useState(null)
+    const [resp, setResp] = useState(false)
 
     useEffect(() => {
+        window.innerWidth <= 700 && setResp(true)
         getPosts(setPosts)
+        window.addEventListener('resize', handleResize)
     }, [])
+
+    const handleResize = () => {
+        window.innerWidth <= 700 ? setResp(true) : setResp(false)
+    }
 
     const delPost = (pid) => {
         deletePost(pid).then(() => {
@@ -54,19 +61,39 @@ const Delete = () => {
                 <motion.div variants={contAnim} initial='hidden' animate='visible' className={styles.postsContainer}>
                         {posts && posts.map(({thumbnail, title, price, pid}) => {
                             return (
-                                <AnimatePresence onExitComplete={() => null} exitBeforeEnter={true}>
+                                <AnimatePresence key={pid} onExitComplete={() => null} exitBeforeEnter={true}>
                                     <motion.div variants={childAnim} key={pid} className={styles.post}>
-                                        <div className={styles.pic}>
-                                            <img src={thumbnail} draggable='false' />
-                                        </div>
-                                        <div className={styles.info}>
-                                            <span>{title}</span>
-                                            <span>${price}</span>
-                                        </div>
-                                        <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
-                                        onClick={() => setDel(pid)}>
-                                            <i className='fas fa-trash'></i>
-                                        </motion.button>
+                                        {!resp ?
+                                        <>
+                                            <div className={styles.pic}>
+                                                <img src={thumbnail} draggable='false' />
+                                            </div>
+                                            <div className={styles.info}>
+                                                <span>{title}</span>
+                                                <span>${price}</span>
+                                            </div>
+                                            <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                                            onClick={() => setDel(pid)}>
+                                                <i className='fas fa-trash'></i>
+                                            </motion.button>
+                                        </>
+                                        :
+                                        <>
+                                            {/* <div className={styles.info}>
+                                                <span>{title}</span>
+                                                <span>${price}</span>
+                                            </div> */}
+                                            <div className={styles.wrapper}>
+                                                <div className={styles.pic}>
+                                                    <img src={thumbnail} draggable='false' />
+                                                </div>
+                                                <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                                                onClick={() => setDel(pid)}>
+                                                    <i className='fas fa-trash'></i>
+                                                </motion.button>
+                                            </div>
+                                        </>
+                                        }
                                     </motion.div>
                                 </AnimatePresence>
                             )

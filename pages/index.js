@@ -24,7 +24,6 @@ const Home = () => {
     return (
         <>
             <div className={styles.container1}>
-                <div className={styles.back}></div>
                 <div className={styles.heroText}>
                     <h2>Maquillaje</h2>
                     <h3>y Accesorios</h3>

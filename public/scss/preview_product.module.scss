@@ -1,6 +1,7 @@
 .card {
-    width: 20em;
-    height: 27em;
+    //width: 20em;
+    aspect-ratio: 20 / 27;
+    max-height: 27em;
     display: flex;
     flex-direction: column;
     color: #f0f0f0;

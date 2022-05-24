@@ -44,3 +44,9 @@
         }
     }
 }
+
+@media (max-width: 500px) {
+    .dashboard {
+        width: calc(100% - 5em);
+    }
+}

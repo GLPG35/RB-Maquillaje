@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-inline: 1em;
 
     form {
         width: 20em;
@@ -19,6 +20,8 @@
             font-weight: 800;
             color: #f0f0f0;
             position: relative;
+            height: max-content;
+            text-align: center;
             
             &::before {
                 position: absolute;

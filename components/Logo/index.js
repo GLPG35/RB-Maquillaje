@@ -5,7 +5,7 @@ import { motion } from 'framer-motion-3d'
 
 export default function Logo({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/images/RB_Maquillaje_2-transformed.glb')
+  const { nodes, materials } = useGLTF('/images/RB_Maquillaje_3-transformed.glb')
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
@@ -22,4 +22,4 @@ export default function Logo({ ...props }) {
   )
 }
 
-useGLTF.preload('/images/RB_Maquillaje_2-transformed.glb')
+useGLTF.preload('/images/RB_Maquillaje_3-transformed.glb')
