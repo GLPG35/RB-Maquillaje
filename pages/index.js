@@ -2,7 +2,7 @@ import styles from '../public/scss/home.module.scss'
 import { useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment } from "@react-three/drei"
-import Logo from '../components/Logo'
+import Logo from '../components/logo'
 import { Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
@@ -12,6 +12,7 @@ import Product from '../components/cards/product'
 const Home = () => {
     const router = useRouter()
     const [posts, setPosts] = useState(undefined)
+    const [render, setRender] = useState(null)
 
     const handleClick = () => {
         router.replace('#catalogue')
@@ -34,12 +35,16 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={styles.logo}>
+                    {!render ?
                     <Suspense fallback={null}>
                         <Canvas gl={{antialias: true}} dpr={[0.8, 1.8]}>
                             <Logo />
                             <Environment background={false} files="/images/env2.hdr" near={1} far={1000} resolution={256} />
                         </Canvas>
                     </Suspense>
+                    :
+                    <img src={render} />
+                    }
                 </div>
             </div>
             <div className={styles.container2} id="catalogue">

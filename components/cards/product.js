@@ -12,7 +12,7 @@ const Product = ({thumb, title, price, desc = null, pid}) => {
                 <span>{desc ? desc : 'No hay descripción de este producto'}</span>
             </div>
             <div className={styles.thumbnail}>
-                <img src={thumb ? thumb : '/images/image_ph.webp'} />
+                <img src={thumb ? thumb : '/images/image_ph.webp'} loading='lazy' />
             </div>
             <div className={styles.bInfo}>
                 <div className={styles.wrapper}>
