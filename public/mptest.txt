@@ -1,6 +1,0 @@
-Tarjeta: 4509 9535 6623 3704
-Vto: 11/25
-Nombre: APRO
-E-Mail: test_user_61414793@testuser.com
-CCV: 123
-Cédula: 12345678

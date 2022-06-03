@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import styles from '../../public/scss/product.module.scss'
 
-const Product = ({thumb, title, price, desc = null, pid}) => {
+const Product = ({thumb, title, price, desc = null, pid, handleClick}) => {
     const [info, setInfo] = useState(false)
 
     return (
@@ -25,7 +25,8 @@ const Product = ({thumb, title, price, desc = null, pid}) => {
                     </div>
                 </div>
                 <div className={styles.cart}>
-                    <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>
+                    <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                    onClick={() => handleClick(pid)}>
                         <i className='fas fa-shopping-cart'></i>
                     </motion.button>
                 </div>

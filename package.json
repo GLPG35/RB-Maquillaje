@@ -1,6 +1,6 @@
 {
   "name": "rbmu",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "Este sitio web es para la venta de maquillaje de RB Maquillaje Uruguay",
   "main": "index.js",
   "scripts": {

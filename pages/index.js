@@ -6,24 +6,48 @@ import Logo from '../components/logo'
 import { Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
-import { getPosts } from '../firebase/client'
+import { getPostFID, getPosts } from '../firebase/client'
 import Product from '../components/cards/product'
+import Header from '../components/layouts/header'
+import getCart from '../hooks/getCart'
 
 const Home = () => {
     const router = useRouter()
     const [posts, setPosts] = useState(undefined)
     const [render, setRender] = useState(null)
+    const [items, setItems] = useState(0)
 
     const handleClick = () => {
         router.replace('#catalogue')
     }
 
+    const handleCart = (pid) => {
+        const cartItems = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [] 
+
+        getPostFID(pid).then((data) => {
+            const exist = cartItems.find(x => x.pid == data.pid)
+
+            if (exist) {
+                const existCartItems = cartItems.map(x => x.pid == data.pid ? {...exist, quantity: exist.quantity + 1} : x)
+                localStorage.setItem('cart', JSON.stringify(existCartItems))
+            } else {
+                data.quantity = 1
+                cartItems.push(data)
+                localStorage.setItem('cart', JSON.stringify(cartItems))
+            }
+
+            setItems(getCart())
+        })
+    }
+
     useEffect(() => {
+        setItems(getCart())
         getPosts(setPosts)
-    })
+    }, [])
 
     return (
         <>
+            <Header items={items} current='home' />
             <div className={styles.container1}>
                 <div className={styles.heroText}>
                     <h2>Maquillaje</h2>
@@ -52,7 +76,7 @@ const Home = () => {
                 <div className={styles.postsContainer}>
                     {posts && posts.map(({thumbnail, title, price, description, pid}) => {
                         return (
-                            <Product key={pid} thumb={thumbnail} title={title} price={price} desc={description} pid={pid} />
+                            <Product key={pid} handleClick={handleCart} thumb={thumbnail} title={title} price={price} desc={description} pid={pid} />
                         )
                     })}
                 </div>
