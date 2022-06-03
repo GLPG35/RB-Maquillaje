@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import getCart from '../hooks/getCart'
 import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
 import styles from '../public/scss/cart.module.scss'
 import MercadoPagoIcon from '../components/icons/mercado_pago'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 
 const Cart = () => {
     const [items, setItems] = useState(0)
     const [cart, setCart] = useState(undefined)
     const [total, setTotal] = useState(0)
+    const router = useRouter()
     const prices = []
 
     const updateCart = () => {
@@ -38,7 +41,7 @@ const Cart = () => {
 
     const decreaseQuantity = (pid) => {
         const cartItems = JSON.parse(localStorage.getItem('cart'))
-        const existCartItems = cartItems.map(x => x.pid == pid ? {...x, quantity: x.quantity - 1} : x)
+        const existCartItems = cartItems.map(x => x.pid == pid && x.quantity > 1 ? {...x, quantity: x.quantity - 1} : x)
         localStorage.setItem('cart', JSON.stringify(existCartItems))
         setCart(JSON.parse(localStorage.getItem('cart')))
         updateCart()
@@ -58,6 +61,7 @@ const Cart = () => {
             <Header current={null} items={items} />
             <div className={styles.container1}>
                 <h2>Tu carrito</h2>
+                {cart && cart.length ?
                 <div className={styles.subContainer1}>
                     <div className={styles.cartList}>
                         {cart &&
@@ -116,7 +120,18 @@ const Cart = () => {
                         </button>
                     </div>
                 </div>
+                : cart && !cart.length &&
+                <div className={styles.cartEmpty}>
+                    <i className='fas fa-gifts'></i>
+                    <h1>¡Tu carrito está vacío!</h1>
+                    <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                    onClick={() => router.push('/')}>
+                        ¡Llenalo!
+                    </motion.button>
+                </div>
+                }
             </div>
+            <Footer />
         </>
     )
 }

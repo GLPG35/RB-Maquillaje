@@ -103,7 +103,7 @@
                                 align-items: center;
                                 justify-content: center;
                                 background-color: #2b2b2b;
-                                width: 1.5em;
+                                padding-inline: 0.5em;
                             }
                         }
 
@@ -224,6 +224,44 @@
                 span {
                     color: #0c0c0c;
                 }
+            }
+        }
+    }
+
+    .cartEmpty {
+        display: flex;
+        height: 70vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1em;
+
+        i {
+            font-size: 6em;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            background: linear-gradient(135deg, #fef482 -50%, #894e00 100%);
+            color: #0c0c0c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+            padding-inline: 2em;
+            height: 3em;
+            border-radius: 50vh;
+            font-weight: 600;
+
+            &:hover {
+                cursor: pointer;
             }
         }
     }

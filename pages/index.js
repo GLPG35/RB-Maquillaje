@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { getPostFID, getPosts } from '../firebase/client'
 import Product from '../components/cards/product'
 import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
 import getCart from '../hooks/getCart'
 
 const Home = () => {
@@ -76,11 +77,13 @@ const Home = () => {
                 <div className={styles.postsContainer}>
                     {posts && posts.map(({thumbnail, title, price, description, pid}) => {
                         return (
-                            <Product key={pid} handleClick={handleCart} thumb={thumbnail} title={title} price={price} desc={description} pid={pid} />
+                            <Product key={pid} handleClick={handleCart} thumb={thumbnail}
+                            title={title} price={price} desc={description} pid={pid} />
                         )
                     })}
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

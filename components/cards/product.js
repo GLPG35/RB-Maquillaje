@@ -1,9 +1,21 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from '../../public/scss/product.module.scss'
 
 const Product = ({thumb, title, price, desc = null, pid, handleClick}) => {
     const [info, setInfo] = useState(false)
+    const [icon, setIcon] = useState(false)
+    const cartButton = useRef(null)
+
+    const addAnimation = () => {
+        
+        setIcon(true)
+
+        setTimeout(() => {
+            
+            setIcon(false)
+        }, 3000)
+    }
 
     return (
         <div className={styles.card}>
@@ -25,9 +37,10 @@ const Product = ({thumb, title, price, desc = null, pid, handleClick}) => {
                     </div>
                 </div>
                 <div className={styles.cart}>
-                    <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
-                    onClick={() => handleClick(pid)}>
-                        <i className='fas fa-shopping-cart'></i>
+                    <motion.button ref={cartButton} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                    onClick={() => {handleClick(pid), addAnimation()}} className={icon ? styles.active : undefined}>
+                        {!icon ? <i className='fas fa-shopping-cart'></i>
+                        : <i className="fas fa-check"></i>}
                     </motion.button>
                 </div>
             </div>
