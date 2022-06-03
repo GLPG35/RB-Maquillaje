@@ -35,7 +35,7 @@ const Header = ({ items, current }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link href={'/idk'}>
+                    <Link href={'/accesorios'}>
                         <a>Accesorios</a>
                     </Link>
                 </li>

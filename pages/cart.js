@@ -12,6 +12,7 @@ const Cart = () => {
     const [cart, setCart] = useState(undefined)
     const [total, setTotal] = useState(0)
     const router = useRouter()
+    const [mobile, setMobile] = useState(false)
     const prices = []
 
     const updateCart = () => {
@@ -27,8 +28,24 @@ const Cart = () => {
         setItems(getCart())
     }
 
+    const handleResize = () => {
+        if (window.innerWidth <= 500) {
+            setMobile(true)
+        } else {
+            setMobile(false)
+        }
+    }
+
     useEffect(() => {
         updateCart()
+
+        if (window.innerWidth <= 500) {
+            setMobile(true)
+        } else {
+            setMobile(false)
+        }
+
+        window.addEventListener('resize', handleResize)
     }, [])
 
     const addQuantity = (pid) => {
@@ -56,6 +73,42 @@ const Cart = () => {
         updateCart()
     }
 
+    const makePayment = () => {
+        const headers = {
+            'Content-Type': 'application-json',
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+        }
+
+        const body = {
+            items: [
+                {
+                    title: 'Pene de goma',
+                    description: 'owo',
+                    picture_url: 'https://firebasestorage.googleapis.com/v0/b/rbmu-27f96.appspot.com/o/thumbnails%2Fb9a858d081461507bec6a80f60030a30.jpg?alt=media&token=4349ac96-f68f-4112-b1b0-4e7c7aa65289',
+                    category_id: '2',
+                    currency_id: 'U$',
+                    quantity: 2,
+                    unit_price: 75
+                }
+            ],
+            back_urls: {
+                success: 'http://localhost:3000/success',
+                failure: 'http://localhost:3000/failure',
+                pending: 'http://localhost:3000/pending'
+            }
+        }
+
+        const url = 'https://api.mercadopago.com/checkout/preferences'
+
+        fetch(url, {
+            method: 'POST',
+            body,
+            headers
+        }).then((data) => {
+            console.log(data)
+        })
+    }
+
     return (
         <>
             <Header current={null} items={items} />
@@ -66,14 +119,44 @@ const Cart = () => {
                     <div className={styles.cartList}>
                         {cart &&
                             cart.map(({title, price, thumbnail, quantity, pid}) => {
-                                return (
-                                    <div key={pid} className={styles.cartItem}>
-                                        <div className={styles.pic}>
-                                            <img src={thumbnail} />
+                                if (!mobile) {
+                                    return (
+                                        <div key={pid} className={styles.cartItem}>
+                                            <div className={styles.pic}>
+                                                <img src={thumbnail} />
+                                            </div>
+                                            <div className={styles.info}>
+                                                <span className={styles.title}>{title}</span>
+                                                <span className={styles.price}>${price}</span>
+                                                <div className={styles.quantity}>
+                                                    <div className={styles.wrapper}>
+                                                        <button onClick={() => decreaseQuantity(pid)}>
+                                                            <i className='fas fa-minus'></i>
+                                                        </button>
+                                                        <span>{quantity}</span>
+                                                        <button onClick={() => addQuantity(pid)}>
+                                                            <i className='fas fa-plus'></i>
+                                                        </button>
+                                                    </div>
+                                                    <motion.button whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                                                    className={styles.deleteItem}
+                                                    onClick={() => deleteItem(pid)}>
+                                                        <i className='fas fa-trash'></i>
+                                                    </motion.button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className={styles.info}>
-                                            <span className={styles.title}>{title}</span>
-                                            <span className={styles.price}>${price}</span>
+                                    )
+                                } else {
+                                    return (
+                                        <div key={pid} className={styles.cartItem}>
+                                            <div className={styles.pic}>
+                                                <img src={thumbnail} />
+                                            </div>
+                                            <div className={styles.info}>
+                                                <span className={styles.title}>{title}</span>
+                                                <span className={styles.price}>${price}</span>
+                                            </div>
                                             <div className={styles.quantity}>
                                                 <div className={styles.wrapper}>
                                                     <button onClick={() => decreaseQuantity(pid)}>
@@ -91,8 +174,8 @@ const Cart = () => {
                                                 </motion.button>
                                             </div>
                                         </div>
-                                    </div>
-                                )
+                                    )
+                                }
                             })
                         }
                     </div>
@@ -114,7 +197,7 @@ const Cart = () => {
                                 <div className={styles.resultPrice}>${total}</div>
                             </div>
                         </div>
-                        <button>
+                        <button onClick={makePayment}>
                             <MercadoPagoIcon width='2.5em' height='2.5em' />
                             <span>Pagar con Mercado Pago</span>
                         </button>
